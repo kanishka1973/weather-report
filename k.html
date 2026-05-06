@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App (No API)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: white;
+    }
+
+    .container {
+      background: rgba(0,0,0,0.3);
+      padding: 20px;
+      border-radius: 15px;
+      width: 300px;
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      width: 70%;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #ff9800;
+      color: white;
+      cursor: pointer;
+    }
+
+    .weather {
+      margin-top: 20px;
+    }
+
+    .temp {
+      font-size: 2em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>🌦 Weather Report</h2>
+  <input type="text" id="city" placeholder="Enter city">
+  <button onclick="getWeather()">Search</button>
+
+  <div class="weather" id="result"></div>
+</div>
+
+<script>
+  
+  const weatherData = {
+    "vadodara": {
+      temp: 34,
+      desc: "Sunny",
+      humidity: 40,
+      wind: 5
+    },
+    "mumbai": {
+      temp: 30,
+      desc: "Cloudy",
+      humidity: 70,
+      wind: 8
+    },
+    "delhi": {
+      temp: 36,
+      desc: "Hot",
+      humidity: 30,
+      wind: 6
+    },
+    "london": {
+      temp: 18,
+      desc: "Rainy",
+      humidity: 80,
+      wind: 10
+    }
+  };
+
+  function getWeather() {
+    const city = document.getElementById("city").value.toLowerCase();
+    const data = weatherData[city];
+
+    if (!data) {
+      document.getElementById("result").innerHTML = "No data available (mock app)";
+      return;
+    }
+
+    document.getElementById("result").innerHTML = `
+      <h3>${city.toUpperCase()}</h3>
+      <div class="temp">${data.temp}°C</div>
+      <p>${data.desc}</p>
+      <p>Humidity: ${data.humidity}%</p>
+      <p>Wind: ${data.wind} km/h</p>
+    `;
+  }
+</script>
+
+</body>
+</html>
